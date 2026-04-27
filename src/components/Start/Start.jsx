@@ -19,8 +19,8 @@ const Start = ({ setQuestionsPage, setStartPage }) => {
       >
         Start Quiz
       </button>
-      <div className="blobYellow"></div>
-      <div className="blobBlue"></div>
+      <div className={styles.blobYellow}></div>
+      <div className={styles.blobBlue}></div>
     </main>
   );
 };
