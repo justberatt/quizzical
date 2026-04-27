@@ -1,0 +1,31 @@
+h1.heading {
+  font-family: "Karla", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #293264;
+  margin: 0;
+}
+
+p.description {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #293264;
+  margin: 0.8em 0 2em;
+}
+
+button.startBtn {
+  font-size: 1rem;
+  padding: 1em 3em;
+  border: none;
+  border-radius: 15px;
+  background-color: #4d5b9e;
+  color: #f5f7fb;
+}
+
+div.blobYellow {
+}
+
+div.blobBlue {
+}
