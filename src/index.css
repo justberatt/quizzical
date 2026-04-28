@@ -7,13 +7,56 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #f5f7fb;
   position: relative;
+  overflow: hidden;
 
   div#root {
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
   }
+}
+
+div.blobYellow {
+  width: 450px;
+  height: 450px;
+  background: #fffad1;
+  border-radius: 58% 42% 71% 29% / 33% 63% 37% 67%;
+  position: absolute;
+  top: -160px;
+  right: -130px;
+  z-index: -1;
+  transition:
+    transform 800ms ease,
+    top 800ms ease,
+    right 800ms ease;
+}
+
+div.blobBlue {
+  width: 450px;
+  height: 450px;
+  background-color: #deebf8;
+  position: absolute;
+  border-radius: 58% 42% 55% 45% / 16% 63% 37% 84%;
+  left: -80px;
+  bottom: -100px;
+  z-index: -1;
+  transition:
+    transform 800ms ease,
+    left 800ms ease,
+    bottom 800ms ease;
+}
+
+div.blobYellow.transformBlobs {
+  top: -190px;
+  right: -160px;
+  transform: rotateZ(-35deg) scale(0.85);
+}
+
+div.blobBlue.transformBlobs {
+  left: -120px;
+  bottom: -140px;
+  transform: scale(0.85);
 }

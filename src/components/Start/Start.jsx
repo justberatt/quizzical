@@ -1,13 +1,27 @@
 import styles from "./Start.module.css";
+import clsx from "clsx";
 
-const Start = ({ setQuestionsPage, setStartPage }) => {
+const Start = ({
+  setQuestionsPage,
+  setStartPage,
+  isTransitioning,
+  setIsTransitioning,
+}) => {
   const handleStartClick = () => {
-    setQuestionsPage(true);
-    setStartPage(false);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setStartPage(false);
+      setQuestionsPage(true);
+    }, 500);
   };
 
   return (
-    <main className={styles.startPageMainContainer}>
+    <main
+      className={clsx(
+        styles.startPageMainContainer,
+        isTransitioning && styles.transformText,
+      )}
+    >
       <h1 className={styles.heading}>Quizzical</h1>
       <p className={styles.description}>
         This is a short quizz game consisting of 5 questions
@@ -19,8 +33,6 @@ const Start = ({ setQuestionsPage, setStartPage }) => {
       >
         Start Quiz
       </button>
-      <div className={styles.blobYellow}></div>
-      <div className={styles.blobBlue}></div>
     </main>
   );
 };

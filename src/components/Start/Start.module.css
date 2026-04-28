@@ -1,3 +1,16 @@
+main.startPageMainContainer {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity ease 500ms,
+    transform ease 500ms;
+}
+
+main.transformText {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
 h1.heading {
   font-family: "Karla", sans-serif;
   font-size: 1.9rem;
@@ -23,27 +36,4 @@ button.startBtn {
   background-color: #4d5b9e;
   color: #f5f7fb;
   cursor: pointer;
-}
-
-div.blobYellow {
-  width: 300px;
-  height: 300px;
-  background: #fffad1;
-  border-radius: 58% 42% 71% 29% / 33% 63% 37% 67%;
-  position: absolute;
-  top: -140px;
-  right: -140px;
-  transform: rotateZ(-30deg);
-  z-index: -1;
-}
-
-div.blobBlue {
-  width: 250px;
-  height: 250px;
-  background-color: #deebf8;
-  position: absolute;
-  border-radius: 58% 42% 55% 45% / 16% 63% 37% 84%;
-  left: -80px;
-  bottom: -100px;
-  z-index: -1;
 }
