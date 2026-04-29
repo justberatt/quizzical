@@ -6,7 +6,8 @@ html {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   background-color: #f5f7fb;
   position: relative;
@@ -50,13 +51,13 @@ div.blobBlue {
 }
 
 div.blobYellow.transformBlobs {
-  top: -190px;
-  right: -160px;
+  top: -220px;
+  right: -200px;
   transform: rotateZ(-35deg) scale(0.85);
 }
 
 div.blobBlue.transformBlobs {
-  left: -120px;
-  bottom: -140px;
+  left: -160px;
+  bottom: -200px;
   transform: scale(0.85);
 }
