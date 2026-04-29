@@ -1,0 +1,22 @@
+main.questionsPageMainContainer {
+  width: 70vw;
+  max-width: 600px;
+  height: 80vh;
+  margin: 0 auto;
+  border: 1px solid crimson;
+  position: relative;
+}
+
+button.checkAnswersBtn {
+  font-size: 1rem;
+  padding: 1em 3em;
+  margin: 2em 0;
+  border: none;
+  border-radius: 15px;
+  background-color: #4d5b9e;
+  color: #f5f7fb;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+}
