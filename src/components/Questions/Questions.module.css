@@ -1,10 +1,52 @@
 main.questionsPageMainContainer {
   width: 70vw;
-  max-width: 600px;
+  max-width: 700px;
   height: 80vh;
   margin: 0 auto;
-  border: 1px solid crimson;
+  /* border: 1px solid crimson; */
   position: relative;
+}
+
+h2.question {
+  font-size: 1rem;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  color: #293264;
+  text-align: left;
+  line-height: 1.2;
+  margin: 1.5em 0 1.2em;
+}
+
+div.answers {
+  text-align: left;
+  margin: 1.2em 0 1.5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5em;
+}
+
+input[type="radio"] {
+  appearance: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+span.singlePossibleAnswer {
+  display: inline-block;
+  padding: 1px 25px;
+  color: #293264;
+  border: 1px solid #4d5b9e;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+hr.horizontalLine {
+  height: 0.1px;
+  opacity: 0.4;
+  margin: 0;
 }
 
 button.checkAnswersBtn {
