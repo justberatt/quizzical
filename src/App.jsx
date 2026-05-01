@@ -1,10 +1,7 @@
-import { decode } from "html-entities";
 import { useState } from "react";
 import Start from "./components/Start/Start";
 import QuestionsPage from "./components/Questions/Questions";
 import clsx from "clsx";
-
-decode("&lt; &gt; &quot; &apos; &amp; &#169; &#8710;");
 
 function App() {
   const [questionsPage, setQuestionsPage] = useState(false);
