@@ -1,6 +1,6 @@
 main.questionsPageMainContainer {
   width: 70vw;
-  max-width: 700px;
+  max-width: 900px;
   height: 80vh;
   margin: 0 auto;
   /* border: 1px solid crimson; */
@@ -36,7 +36,7 @@ input[type="radio"] {
 
 span.singlePossibleAnswer {
   display: inline-block;
-  padding: 1px 25px;
+  padding: 1px 15px;
   color: #293264;
   border: 1px solid #4d5b9e;
   border-radius: 14px;

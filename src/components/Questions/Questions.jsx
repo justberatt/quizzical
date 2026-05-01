@@ -1,5 +1,6 @@
 import styles from "./Questions.module.css";
 import { useState, useEffect } from "react";
+import { decode } from "html-entities";
 
 const QuestionsPage = () => {
   const [questionsWithPossibleAnswers, setQuestionsWithPossibleAnswers] =
@@ -15,12 +16,15 @@ const QuestionsPage = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        if (!data) throw new Error("No data received");
         const processed = data.results.map((result) => ({
-          question: result.question,
+          question: decode(result.question),
           allPossibleAnswers: [
             ...result.incorrect_answers,
             result.correct_answer,
-          ].sort(() => Math.random() - 0.5),
+          ]
+            .map((answer) => decode(answer))
+            .sort(() => Math.random() - 0.5),
         }));
         setQuestionsWithPossibleAnswers(processed);
         setLoading(false);
@@ -54,10 +58,18 @@ const QuestionsPage = () => {
     ),
   );
 
+  const tallyAnswers = () => {
+    // I will add the code to tally answers here
+  };
+
   return (
     <main className={styles.questionsPageMainContainer}>
       {questionsWithPossibleAnswers && renderQuestions}
-      <button type="submit" className={styles.checkAnswersBtn}>
+      <button
+        type="button"
+        className={styles.checkAnswersBtn}
+        onClick={tallyAnswers}
+      >
         Check Answers
       </button>
     </main>
