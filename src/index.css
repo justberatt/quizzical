@@ -8,16 +8,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
   background-color: #f5f7fb;
-  position: relative;
-  overflow: hidden;
 
   div#root {
     margin: 0 auto;
-    padding: 2rem;
     text-align: center;
   }
+}
+
+div.blobContainer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden; /* clips the blobs without affecting scroll */
+  pointer-events: none;
 }
 
 div.blobYellow {
