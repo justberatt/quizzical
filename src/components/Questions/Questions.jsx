@@ -5,13 +5,14 @@ import { decode } from "html-entities";
 const QuestionsPage = () => {
   const [questionsWithPossibleAnswers, setQuestionsWithPossibleAnswers] =
     useState([]);
+  // const [selectedAnswers, setSelectedAnswers] = useState([])
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
     fetch(
-      "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium&type=multiple",
+      "https://opentdb.com/api.php?amount=7&category=18&difficulty=medium&type=multiple",
       { signal: controller.signal },
     )
       .then((res) => res.json())
@@ -19,6 +20,7 @@ const QuestionsPage = () => {
         if (!data) throw new Error("No data received");
         const processed = data.results.map((result) => ({
           question: decode(result.question),
+          correctAnswer: result.correct_answer,
           allPossibleAnswers: [
             ...result.incorrect_answers,
             result.correct_answer,
@@ -41,7 +43,12 @@ const QuestionsPage = () => {
   const renderAnswers = (allPossibleAnswers, questionIndex) =>
     allPossibleAnswers.map((answer) => (
       <label key={answer}>
-        <input type="radio" name={`question${questionIndex}`} value={answer} />
+        <input
+          type="radio"
+          name={`question${questionIndex}`}
+          value={answer}
+          // onChange={}
+        />
         <span className={styles.singlePossibleAnswer}>{answer}</span>
       </label>
     ));
