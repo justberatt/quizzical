@@ -19,13 +19,14 @@ function App() {
         />
       )}
       {questionsPage && <QuestionsPage />}
-
-      <div
-        className={clsx("blobYellow", isTransitioning && "transformBlobs")}
-      ></div>
-      <div
-        className={clsx("blobBlue", isTransitioning && "transformBlobs")}
-      ></div>
+      <div className="blobContainer">
+        <div
+          className={clsx("blobYellow", isTransitioning && "transformBlobs")}
+        ></div>
+        <div
+          className={clsx("blobBlue", isTransitioning && "transformBlobs")}
+        ></div>
+      </div>
     </>
   );
 }
