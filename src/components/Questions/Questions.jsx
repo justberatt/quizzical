@@ -5,7 +5,7 @@ import { decode } from "html-entities";
 const QuestionsPage = () => {
   const [questionsWithPossibleAnswers, setQuestionsWithPossibleAnswers] =
     useState([]);
-  // const [selectedAnswers, setSelectedAnswers] = useState([])
+  const [selectedAnswers, setSelectedAnswers] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,6 +28,7 @@ const QuestionsPage = () => {
             .map((answer) => decode(answer))
             .sort(() => Math.random() - 0.5),
         }));
+
         setQuestionsWithPossibleAnswers(processed);
         setLoading(false);
       })
@@ -40,6 +41,10 @@ const QuestionsPage = () => {
   if (error) return <p>Something went wrong: {error}</p>;
   if (loading) return <p>Loading ...</p>;
 
+  const selectAnswer = (answer, questionIndex) => {
+    setSelectedAnswers((prev) => ({ ...prev, [questionIndex]: answer }));
+  };
+
   const renderAnswers = (allPossibleAnswers, questionIndex) =>
     allPossibleAnswers.map((answer) => (
       <label key={answer}>
@@ -47,7 +52,7 @@ const QuestionsPage = () => {
           type="radio"
           name={`question${questionIndex}`}
           value={answer}
-          // onChange={}
+          onChange={() => selectAnswer(answer, questionIndex)}
         />
         <span className={styles.singlePossibleAnswer}>{answer}</span>
       </label>
@@ -65,9 +70,12 @@ const QuestionsPage = () => {
     ),
   );
 
-  const tallyAnswers = () => {
-    // I will add the code to tally answers here
-  };
+  console.log("selectedAnswers: ", selectedAnswers);
+  console.log(
+    "Correct Answers: ",
+    questionsWithPossibleAnswers.map((answer) => answer),
+  );
+  // const tallyAnswers = () => {};
 
   return (
     <main className={styles.questionsPageMainContainer}>
@@ -75,7 +83,7 @@ const QuestionsPage = () => {
       <button
         type="button"
         className={styles.checkAnswersBtn}
-        onClick={tallyAnswers}
+        // onClick={tallyAnswers}
       >
         Check Answers
       </button>
