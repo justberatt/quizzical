@@ -58,6 +58,13 @@ span.dimmedAnswer {
   cursor: default;
 }
 
+span.missedAnswer {
+  background-color: #94D7A2;
+  opacity: 0.4;
+  cursor: default;
+  border-style: dashed;
+}
+
 hr.horizontalLine {
   height: 0.1px;
   opacity: 0.4;

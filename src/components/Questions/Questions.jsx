@@ -52,7 +52,10 @@ const QuestionsPage = () => {
     if (score === null) {
       return isSelected ? styles.selectedAnswer : "";
     }
-    if (answer === correctAnswer) return styles.correctAnswer;
+    if (answer === correctAnswer)
+      return selectedAnswers[questionIndex] !== undefined
+        ? styles.correctAnswer
+        : styles.missedAnswer;
     if (isSelected) return styles.incorrectAnswer;
     return styles.dimmedAnswer;
   };
