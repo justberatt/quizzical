@@ -6,6 +6,8 @@ const QuestionsPage = () => {
   const [questionsWithPossibleAnswers, setQuestionsWithPossibleAnswers] =
     useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [score, setScore] = useState(null);
+  const [gameKey, setGameKey] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,7 +22,7 @@ const QuestionsPage = () => {
         if (!data) throw new Error("No data received");
         const processed = data.results.map((result) => ({
           question: decode(result.question),
-          correctAnswer: result.correct_answer,
+          correctAnswer: decode(result.correct_answer),
           allPossibleAnswers: [
             ...result.incorrect_answers,
             result.correct_answer,
@@ -36,7 +38,7 @@ const QuestionsPage = () => {
         if (err.name !== "AbortError") setError(err.message);
       });
     return () => controller.abort();
-  }, []);
+  }, [gameKey]);
 
   if (error) return <p>Something went wrong: {error}</p>;
   if (loading) return <p>Loading ...</p>;
@@ -45,7 +47,17 @@ const QuestionsPage = () => {
     setSelectedAnswers((prev) => ({ ...prev, [questionIndex]: answer }));
   };
 
-  const renderAnswers = (allPossibleAnswers, questionIndex) =>
+  const getAnswerClass = (answer, questionIndex, correctAnswer) => {
+    const isSelected = selectedAnswers[questionIndex] === answer;
+    if (score === null) {
+      return isSelected ? styles.selectedAnswer : "";
+    }
+    if (answer === correctAnswer) return styles.correctAnswer;
+    if (isSelected) return styles.incorrectAnswer;
+    return "";
+  };
+
+  const renderAnswers = (allPossibleAnswers, questionIndex, correctAnswer) =>
     allPossibleAnswers.map((answer) => (
       <label key={answer}>
         <input
@@ -54,7 +66,11 @@ const QuestionsPage = () => {
           value={answer}
           onChange={() => selectAnswer(answer, questionIndex)}
         />
-        <span className={styles.singlePossibleAnswer}>{answer}</span>
+        <span
+          className={`${styles.singlePossibleAnswer} ${getAnswerClass(answer, questionIndex, correctAnswer)}`}
+        >
+          {answer}
+        </span>
       </label>
     ));
 
@@ -63,30 +79,49 @@ const QuestionsPage = () => {
       <div key={question.question}>
         <h2 className={styles.question}>{question.question}</h2>
         <div className={styles.answers}>
-          {renderAnswers(question.allPossibleAnswers, questionIndex)}
+          {renderAnswers(question.allPossibleAnswers, questionIndex, question.correctAnswer)}
         </div>
         <hr className={styles.horizontalLine} />
       </div>
     ),
   );
 
-  console.log("selectedAnswers: ", selectedAnswers);
-  console.log(
-    "Correct Answers: ",
-    questionsWithPossibleAnswers.map((answer) => answer),
-  );
-  // const tallyAnswers = () => {};
+  const tallyAnswers = () => {
+    const correct = questionsWithPossibleAnswers.reduce(
+      (count, question, index) =>
+        selectedAnswers[index] === question.correctAnswer ? count + 1 : count,
+      0,
+    );
+    setScore(correct);
+  };
+
+  const resetGame = () => {
+    setSelectedAnswers({});
+    setScore(null);
+    setLoading(true);
+    setError(null);
+    setGameKey((prev) => prev + 1);
+  };
 
   return (
     <main className={styles.questionsPageMainContainer}>
       {questionsWithPossibleAnswers && renderQuestions}
-      <button
-        type="button"
-        className={styles.checkAnswersBtn}
-        // onClick={tallyAnswers}
-      >
-        Check Answers
-      </button>
+      {score !== null ? (
+        <div className={styles.scoreRow}>
+          <p>You scored {score}/{questionsWithPossibleAnswers.length} correct answers</p>
+          <button type="button" className={styles.checkAnswersBtn} onClick={resetGame}>
+            Play Again
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          className={styles.checkAnswersBtn}
+          onClick={tallyAnswers}
+        >
+          Check Answers
+        </button>
+      )}
     </main>
   );
 };

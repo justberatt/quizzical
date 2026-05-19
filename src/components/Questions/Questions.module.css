@@ -41,10 +41,29 @@ span.singlePossibleAnswer {
   cursor: pointer;
 }
 
+span.selectedAnswer {
+  background-color: #D6DBF5;
+}
+
+span.correctAnswer {
+  background-color: #94D7A2;
+}
+
+span.incorrectAnswer {
+  background-color: #F8BCBC;
+}
+
 hr.horizontalLine {
   height: 0.1px;
   opacity: 0.4;
   margin: 0;
+}
+
+div.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  margin: 2em 0;
 }
 
 button.checkAnswersBtn {
