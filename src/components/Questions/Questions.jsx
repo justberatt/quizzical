@@ -54,7 +54,7 @@ const QuestionsPage = () => {
     }
     if (answer === correctAnswer) return styles.correctAnswer;
     if (isSelected) return styles.incorrectAnswer;
-    return "";
+    return styles.dimmedAnswer;
   };
 
   const renderAnswers = (allPossibleAnswers, questionIndex, correctAnswer) =>
@@ -65,6 +65,7 @@ const QuestionsPage = () => {
           name={`question${questionIndex}`}
           value={answer}
           onChange={() => selectAnswer(answer, questionIndex)}
+          disabled={score !== null && selectedAnswers[questionIndex] !== answer}
         />
         <span
           className={`${styles.singlePossibleAnswer} ${getAnswerClass(answer, questionIndex, correctAnswer)}`}
