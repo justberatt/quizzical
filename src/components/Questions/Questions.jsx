@@ -83,7 +83,11 @@ const QuestionsPage = () => {
       <div key={question.question}>
         <h2 className={styles.question}>{question.question}</h2>
         <div className={styles.answers}>
-          {renderAnswers(question.allPossibleAnswers, questionIndex, question.correctAnswer)}
+          {renderAnswers(
+            question.allPossibleAnswers,
+            questionIndex,
+            question.correctAnswer,
+          )}
         </div>
         <hr className={styles.horizontalLine} />
       </div>
@@ -112,8 +116,15 @@ const QuestionsPage = () => {
       {questionsWithPossibleAnswers && renderQuestions}
       {score !== null ? (
         <div className={styles.scoreRow}>
-          <p>You scored {score}/{questionsWithPossibleAnswers.length} correct answers</p>
-          <button type="button" className={styles.checkAnswersBtn} onClick={resetGame}>
+          <p className={styles.scoreMessage}>
+            You scored {score}/{questionsWithPossibleAnswers.length} correct
+            answers
+          </p>
+          <button
+            type="button"
+            className={styles.checkAnswersBtn}
+            onClick={resetGame}
+          >
             Play Again
           </button>
         </div>
